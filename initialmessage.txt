@@ -1,0 +1,128 @@
+Hello I need help writing a program in python that lets the user edit BeamNG.Drive scriptAI lines. These lines are user recorded in the game and are saved in the following json format
+
+For time based lines, the json format is
+{
+  "externalForce":true,
+  "path":[
+    {
+      "dir":{"x":0.98531761,"y":-0.05399000603,"z":-0.1619700181},
+      "t":0,
+      "up":{"x":0,"y":0,"z":1},
+      "x":0.5503342152,
+      "y":-1.422377706,
+      "z":0.4187472761
+    },
+    {
+      "t":4.577500343,
+      "x":0.5503385663,
+      "y":-1.422377944,
+      "z":0.4187465608
+    },
+    {
+      "t":6.283500195,
+      "x":0.5494026542,
+      "y":-1.439921856,
+      "z":0.4227375686
+    },
+    {
+      "t":6.592000008,
+      "x":0.5466912389,
+      "y":-1.677294612,
+      "z":0.4567390382
+    },
+    {
+      "t":7.085000038,
+      "x":0.4480653405,
+      "y":-3.003205061,
+      "z":0.4566123486
+    },
+    {
+      "t":7.368500233,
+      "x":0.3216291666,
+      "y":-4.249224663,
+      "z":0.4538142979
+    },
+   {
+      "t":18.39350128,
+      "x":-16.89897919,
+      "y":-32.9475708,
+      "z":0.4142097831
+    }
+  ]
+}
+
+For velocity based lines, the json format is
+{
+  "externalForce":true,
+  "path":[
+    {
+      "dir":{"x":0.8779737055,"y":-0.3184764156,"z":0.3574002591},
+      "up":{"x":0,"y":0,"z":1},
+      "v":6.76796335e-05,
+      "x":-22.25309372,
+      "y":-34.68932343,
+      "z":0.3771524131
+    },
+    {
+      "v":0.05783316121,
+      "x":-22.24922371,
+      "y":-34.69072723,
+      "z":0.3787277937
+    },
+    {
+      "v":1.148277044,
+      "x":-22.04784203,
+      "y":-34.67242432,
+      "z":0.4261798263
+    },
+    {
+      "v":2.081491232,
+      "x":-21.66882896,
+      "y":-34.63158417,
+      "z":0.4523146451
+    },
+    {
+      "v":5.557771206,
+      "x":-18.15289497,
+      "y":-34.26004028,
+      "z":0.4270541668
+    },
+    {
+      "v":0.0692846328,
+      "x":61.33291245,
+      "y":31.96271515,
+      "z":0.3739222288
+    }
+  ]
+}
+
+Here is my list of features I would like the program to contain, ordered starting with the vital core features and ending with things that are nice to have but not necessary.
+
+Autobeam ScriptAI Line Editor
+
+Core required functionality 
+•	Reading the scriptai json files and automatically determining if they are time or velocity based through their format
+•	Display the lines as a series of points in a GUI
+•	Allow the user to zoom in/out and drag the view of the line around without affecting the points themselves
+•	Save the edited line to a new json file
+
+Must haves/Immediate Needs
+•	Line looping/duplication
+o	Select start and end points, enter how many loops to create
+•	Full line speed scaling
+o	Scale entire line’s speed by some %
+•	Area speed scaling
+o	Select start and end points, scale that area by some %
+
+Non-urgent but still features we should have
+•	Point position editing
+o	Native in beam, nice to have in the editor
+•	Accurate track map display
+o	Display the lines over an image of the beam map
+•	Line loop/duplication randomness
+o	Apply some random jitter to the line every iteration it loops so each lap is slightly different
+
+Long term not necessary but cool to have things
+•	Automatic line generation
+o	Enter some parameters for the maximum speed/characteristics of the car and it generates a line for you
+
