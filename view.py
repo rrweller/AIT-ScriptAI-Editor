@@ -104,3 +104,7 @@ class Viewport:
 
     def transform(self, x, y):
         return x * self.zoom + self.offset_x, y * self.zoom + self.offset_y
+    
+    def transform_inverse(self, x, y):
+        # Transform screen coordinates to viewport coordinates
+        return (x - self.offset_x) / self.zoom, (y - self.offset_y) / self.zoom

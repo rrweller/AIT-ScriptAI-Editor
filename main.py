@@ -3,6 +3,7 @@ import json
 from tkinter import filedialog, messagebox
 from json_parser import read_scriptai_json
 from view import Viewport
+from point_select import PointSelector
 
 class LineEditorApp:
     def __init__(self, master):
@@ -22,6 +23,7 @@ class LineEditorApp:
         self.canvas = tk.Canvas(self.canvas_frame, bg="white", width=800, height=600)
         self.canvas.pack(side="top", fill="both", expand=True)
         self.viewport = Viewport(self.canvas)
+        self.point_selector = PointSelector(self.canvas, self.viewport)
 
     def create_side_panel(self):
         self.side_panel = tk.Frame(self.master, bg="lightgrey", width=200)
