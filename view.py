@@ -16,7 +16,25 @@ class Viewport:
 
     def zoom_view(self, event):
         scale_factor = 1.1
-        self.zoom *= scale_factor if event.delta > 0 else 1 / scale_factor
+
+        # Coordinates of the mouse position relative to the canvas
+        canvas_x = self.canvas.canvasx(event.x)
+        canvas_y = self.canvas.canvasy(event.y)
+
+        # Coordinates of the mouse position in the transformed view
+        view_x = (canvas_x - self.offset_x) / self.zoom
+        view_y = (canvas_y - self.offset_y) / self.zoom
+
+        # Update the zoom
+        if event.delta > 0:  # Zoom in
+            self.zoom *= scale_factor
+        else:  # Zoom out
+            self.zoom /= scale_factor
+
+        # Recalculate offsets to keep the mouse point stationary
+        self.offset_x = canvas_x - view_x * self.zoom
+        self.offset_y = canvas_y - view_y * self.zoom
+
         self.redraw()
 
     def start_drag(self, event):
