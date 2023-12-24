@@ -34,18 +34,32 @@ class PointSelector:
         self.selected_point = point_index
         print(f"Selected point: {self.selected_point}")
 
-        # Additional code to visually indicate selection can be added here
-
+        # Change the color of the selected point
+        point = self.viewport.path_data[point_index]
+        self.original_color = point['color']
+        point['color'] = self.lighten_color(self.original_color, 0.5)
+        self.viewport.draw_point(point, radius=3)
+    
     def deselect_point(self):
         if self.selected_point is not None:
             print("Point deselected")
+            
+            # Restore the original color of the point
+            point = self.viewport.path_data[self.selected_point]
+            point['color'] = self.original_color
+            self.viewport.draw_point(point, radius=3)
+
             self.selected_point = None
-            # Additional code to visually update deselection can be added here
+
+    def lighten_color(self, color, factor):
+        # Lighten the given RGB color
+        r, g, b = color
+        return int(r + (255 - r) * factor), int(g + (255 - g) * factor), int(b + (255 - b) * factor)
 
     def selection_threshold(self):
         # Determine the threshold radius for selecting a point
         # This can be a fixed value or dynamically based on the zoom level
-        return 5 / self.viewport.zoom
+        return 6 / self.viewport.zoom
 
     def transform_inverse(self, x, y):
         # Transform screen coordinates to viewport coordinates

@@ -86,21 +86,26 @@ class Viewport:
             return
 
         for i in range(len(self.path_data) - 1):
-            self.draw_line(self.path_data[i], self.path_data[i + 1])
-            self.draw_point(self.path_data[i])
+            start_point = self.path_data[i]
+            end_point = self.path_data[i + 1]
+            self.draw_line(start_point, end_point, color=start_point['color'])
+            self.draw_point(start_point)
 
-        self.draw_point(self.path_data[-1])
+        # Draw the last point
+        if self.path_data:
+            self.draw_point(self.path_data[-1])
 
-        self.canvas.update_idletasks()  # Force the canvas to update its layout
-
-    def draw_point(self, point, radius=3, color='blue'):
+    def draw_point(self, point, radius=3):
         x, y = self.transform(point['x'], point['y'])
-        self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=color)
+        color = point['color']
+        rgb_color = f'#{color[0]:02x}{color[1]:02x}{color[2]:02x}'
+        self.canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill=rgb_color, outline='')
 
-    def draw_line(self, start, end, color='blue', width=1):
+    def draw_line(self, start, end, color=(0, 0, 255), width=1):  # Default color blue
         x1, y1 = self.transform(start['x'], start['y'])
         x2, y2 = self.transform(end['x'], end['y'])
-        self.canvas.create_line(x1, y1, x2, y2, fill=color, width=width)
+        rgb_color = f'#{color[0]:02x}{color[1]:02x}{color[2]:02x}'
+        self.canvas.create_line(x1, y1, x2, y2, fill=rgb_color, width=width)
 
     def transform(self, x, y):
         return x * self.zoom + self.offset_x, y * self.zoom + self.offset_y

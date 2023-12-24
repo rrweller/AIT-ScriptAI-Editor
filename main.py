@@ -40,6 +40,11 @@ class LineEditorApp:
 
     def read_json(self, file_path):
         _, self.path_data = read_scriptai_json(file_path)
+
+        # Assign a default color to each point
+        for point in self.path_data['path']:
+            point['color'] = (70, 93, 242)  # Default blue color
+
         self.viewport.set_path_data(self.path_data['path'])
 
     def export_json(self):
