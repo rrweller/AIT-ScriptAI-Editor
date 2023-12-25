@@ -26,6 +26,9 @@ class PointSelector:
             self.select_point(closest_point)
         else:
             self.deselect_point()
+        
+        if self.selected_point is not None:
+            self.looping_handler.check_pending_selection(self.selected_point)
 
     def select_point(self, point_index):
         if self.selected_point is not None:
